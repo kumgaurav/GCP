@@ -1,0 +1,5 @@
+gcloud deployment-manager deployments create gcpnet --config=config.yaml
+
+for retry
+
+gcloud deployment-manager deployments delete gcpnet
