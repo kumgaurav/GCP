@@ -12,3 +12,6 @@ To change the object to have private access, execute the following command:
 gsutil acl set private gs://$MY_BUCKET_NAME_1/cat.jpg
 gsutil acl get gs://$MY_BUCKET_NAME_1/cat.jpg  > acl-2.txt
 cat acl-2.txt
+
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/

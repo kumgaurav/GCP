@@ -1,0 +1,10 @@
+gcloud endpoints services deploy openapi-appengine.yaml
+
+gcloud services enable servicemanagement.googleapis.com
+gcloud services enable servicecontrol.googleapis.com
+gcloud services enable endpoints.googleapis.com
+
+gcloud services list
+
+mvn appengine:stage
+gcloud app deploy target/appengine-staging
