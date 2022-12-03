@@ -1,0 +1,4 @@
+kubectl apply -f kubernetes-config.yaml
+
+kubectl get pods
+
