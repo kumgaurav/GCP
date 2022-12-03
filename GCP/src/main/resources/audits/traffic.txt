@@ -1,2 +1,0 @@
-export MY_SERVER=34.71.110.61
-for ((i=1;i<=50;i++)); do curl $MY_SERVER; done

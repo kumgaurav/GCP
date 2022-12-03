@@ -1,4 +1,0 @@
-gcloud app create --region=us-central
-gcloud app deploy --version=one --quiet
-
-gcloud app deploy --version=two --no-promote --quiet

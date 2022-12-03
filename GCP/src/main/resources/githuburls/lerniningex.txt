@@ -1,4 +1,0 @@
-git clone https://GitHub.com/GoogleCloudPlatform/training-data-analyst.git
-https://github.com/GoogleCloudPlatform/datalab-samples/blob/master/basemap/earthquakes.ipynb
-
-wget http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.csv -O earthquakes.csv

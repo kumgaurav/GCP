@@ -1,2 +1,0 @@
-PATH=/usr/lib/google-cloud-sdk/bin:$PATH
-gcloud auth configure-docker

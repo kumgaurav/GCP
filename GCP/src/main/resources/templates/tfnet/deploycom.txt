@@ -1,9 +1,0 @@
-https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html
-https://registry.terraform.io/browse?provider=google&verified=true
-cd tfnet
-terraform init
-
-terraform fmt
-terraform init
-terraform plan
-terraform apply
