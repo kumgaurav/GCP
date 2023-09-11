@@ -52,11 +52,15 @@ public class LoginController {
     public String getLoginInfo(Model model, OAuth2AuthenticationToken authentication) {
 
         OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
+       
 
         String userInfoEndpointUri = client.getClientRegistration()
             .getProviderDetails()
             .getUserInfoEndpoint()
             .getUri();
+        
+        log.info("AuthorizationGrantType : "+client.getClientRegistration().getAuthorizationGrantType().getValue());
+        log.info("RedirectUriTemplate : "+client.getClientRegistration().getRedirectUriTemplate());
 
         if (!StringUtils.isEmpty(userInfoEndpointUri)) {
             RestTemplate restTemplate = new RestTemplate();
@@ -66,10 +70,12 @@ public class LoginController {
 
             HttpEntity<String> entity = new HttpEntity<String>("", headers);
             log.info("Token -> "+client.getAccessToken().getTokenValue());
+            log.info("RefreshToken -> "+client.getRefreshToken());
             ResponseEntity<Map> response = restTemplate.exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
             Map userAttributes = response.getBody();
             model.addAttribute("name", userAttributes.get("name"));
             model.addAttribute("token", client.getAccessToken().getTokenValue());
+            model.addAttribute("refreshToken", client.getAccessToken().getTokenValue());
         }
 
         return "loginSuccess";

@@ -1,5 +1,7 @@
 package com.gkumargaur.oauth2request;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.RequestEntity;
 import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
@@ -7,7 +9,7 @@ import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCo
 import org.springframework.util.MultiValueMap;
 
 public class CustomRequestEntityConverter implements Converter<OAuth2AuthorizationCodeGrantRequest, RequestEntity<?>> {
-
+	private static final Logger log = LoggerFactory.getLogger(CustomRequestEntityConverter.class);
     private OAuth2AuthorizationCodeGrantRequestEntityConverter defaultConverter;
     
     public CustomRequestEntityConverter() {
@@ -19,7 +21,7 @@ public class CustomRequestEntityConverter implements Converter<OAuth2Authorizati
         RequestEntity<?> entity = defaultConverter.convert(req);
         MultiValueMap<String, String> params = (MultiValueMap<String,String>) entity.getBody();
         params.add("test2", "extra2");
-        System.out.println(params.entrySet());
+        log.info("params : "+params.entrySet());
         return new RequestEntity<>(params, entity.getHeaders(), entity.getMethod(), entity.getUrl());
     }
 

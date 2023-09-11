@@ -7,13 +7,15 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver;
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 
 public class CustomAuthorizationRequestResolver implements OAuth2AuthorizationRequestResolver {
-    
+	private static final Logger log = LoggerFactory.getLogger(CustomAuthorizationRequestResolver.class);
     private OAuth2AuthorizationRequestResolver defaultResolver;
 
     public CustomAuthorizationRequestResolver(ClientRegistrationRepository repo, String authorizationRequestBaseUri){
@@ -42,7 +44,7 @@ public class CustomAuthorizationRequestResolver implements OAuth2AuthorizationRe
         Map<String,Object> extraParams = new HashMap<String,Object>();
         extraParams.putAll(req.getAdditionalParameters()); //VIP note
         extraParams.put("test", "extra");
-        System.out.println("here =====================");
+        log.info("here =====================");
         return OAuth2AuthorizationRequest.from(req).additionalParameters(extraParams).build();
     }
 

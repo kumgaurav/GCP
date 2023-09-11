@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AccessTokenResponse;
@@ -15,6 +17,7 @@ import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.util.StringUtils;
 
 public class CustomTokenResponseConverter implements Converter<Map<String, String>, OAuth2AccessTokenResponse> {
+	private static final Logger log = LoggerFactory.getLogger(CustomTokenResponseConverter.class);
     private static final Set<String> TOKEN_RESPONSE_PARAMETER_NAMES = Stream.of(
         OAuth2ParameterNames.ACCESS_TOKEN, 
         OAuth2ParameterNames.TOKEN_TYPE, 
@@ -48,6 +51,7 @@ public class CustomTokenResponseConverter implements Converter<Map<String, Strin
         }
 
         String refreshToken = tokenResponseParameters.get(OAuth2ParameterNames.REFRESH_TOKEN);
+        log.info("refreshToken : "+refreshToken);
 
         Map<String, Object> additionalParameters = new LinkedHashMap<>();
         tokenResponseParameters.entrySet()
